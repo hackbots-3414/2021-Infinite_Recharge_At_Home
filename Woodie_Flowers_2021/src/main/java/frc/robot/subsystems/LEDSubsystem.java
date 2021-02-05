@@ -199,4 +199,8 @@ public class LEDSubsystem extends SubsystemBase {
     m_led.setData(m_ledBuffer);
     m_led.start();
   }
+
+  public void party() {
+    
+  }
 }
