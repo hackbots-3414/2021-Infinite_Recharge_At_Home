@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 
 public class LEDSubsystem extends SubsystemBase {
-  public static final int NUMBER_OF_LEDS = 12;
+  public static final int NUMBER_OF_LEDS = 40;
   public static final int LED_PORT = 9;
   private AddressableLED m_led;
   private AddressableLEDBuffer m_ledBuffer;
