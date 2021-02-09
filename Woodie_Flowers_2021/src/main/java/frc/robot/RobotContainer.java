@@ -12,7 +12,7 @@ import static frc.robot.DriveConstants.kMaxAccelerationMetersPerSecondSquared;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-
+import frc.robot.commands.DriveStraight;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -279,6 +279,7 @@ public class RobotContainer {
     whileHeldOperatorPadButton(pullyCommandpos, OI.X_BTN_PULLY);
     whileHeldOperatorPadButton(ejectBelt, 8);
     whileHeldOperatorPadButton(beltForward, 7);
+    whileHeldDriverPadButton(new DriveStraight(.25, 1, m_drivetrainSubsystem), 6);
   }
 
   public void whileHeldOperatorPadButton(final Command command, final int buttonNumber) {
