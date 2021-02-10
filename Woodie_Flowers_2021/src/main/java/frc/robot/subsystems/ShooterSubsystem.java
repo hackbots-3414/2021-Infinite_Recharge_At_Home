@@ -42,6 +42,8 @@ public class ShooterSubsystem extends PIDSubsystem {
 
     public void setShooterVelocity(double setpoint) {
         setSetpoint(setpoint);
+        
+        
     }
 
     public double getLeftShooterVelocity() {
