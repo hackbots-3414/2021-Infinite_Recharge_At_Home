@@ -30,6 +30,12 @@ public class OI {
   public static final int RB_BTN_HOOK_NEGATIVE = 1;
   public static final int X_BTN_PULLY = 3;
 
+  //BUTTON MAPPING FOR INTERSTELLAR ACCURACY 
+  public static final int A1_E1_GREEN = 5;
+  public static final int A3_E3_YELLOW = 6;
+  public static final int A5_E5_BLUE = 7;
+  public static final int A7_E7_RED = 8;
+  public static final int A9_E9_INTRO = 9;
 
   public static XboxController getDrivePad() {
     return pad;

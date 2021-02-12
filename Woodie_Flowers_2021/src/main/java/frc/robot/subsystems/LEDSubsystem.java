@@ -126,6 +126,16 @@ public class LEDSubsystem extends SubsystemBase {
     lightChase(color.getHue(), color.getSaturation(), color.getValue());
   }
 
+  public void lightChaseOrange() {
+    Color color = ColorSystem.getColor(ColorSystem.COLOR_ORANGE);
+    lightChase(color.getHue(), color.getSaturation(), color.getValue());
+  }
+
+  public void lightChasePurple() {
+    Color color = ColorSystem.getColor(ColorSystem.COLOR_PURPLE);
+    lightChase(color.getHue(), color.getSaturation(), color.getValue());
+  }
+
   private void lightChase(int h, int s, int v) {
 
     m_chaseLightIndex = 0;
@@ -153,6 +163,31 @@ public class LEDSubsystem extends SubsystemBase {
   public void colorPulsePurple() {
     colorPulse(ColorSystem.getColor(ColorSystem.COLOR_PURPLE));
   }
+  
+  public void colorPulseRed() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_RED));
+  }
+
+  public void colorPulseGreen() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_GREEN));
+  }
+
+  public void colorPulseBlue() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_BLUE));
+  }
+
+  public void colorPulsePink() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_PINK));
+  }
+
+  public void colorPulseYellow() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_YELLOW));
+  }
+
+  public void colorPulseOrange() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_ORANGE));
+  }
+  
 
   public void drivingTargetNotInView() {
     solidColorYellow();
@@ -201,6 +236,21 @@ public class LEDSubsystem extends SubsystemBase {
   }
 
   public void party() {
+      colorPulsePurple();
+      lightChaseRed();
+      colorPulseBlue();
+      lightChaseRed();
+      colorPulseGreen();
+      lightChaseBlue();
+      colorPulseOrange();
+      lightChaseGreen();
+      colorPulsePink();
+      lightChasePurple();
+      colorPulseRed();
+      lightChaseOrange();
+      colorPulseYellow();  
+      
+    }
     
-  }
+  
 }
