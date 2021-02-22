@@ -27,8 +27,8 @@ public class LEDParty extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ledParty.switchOnLEDs(ColorSystem.COLOR_BLUE, ColorSystem.COLOR_PATTERN_CHASE);
-    ledParty.party();
+    ledParty.switchOnLEDs(ColorSystem.COLOR_GREEN, ColorSystem.COLOR_PATTERN_SOLID);
+    //ledParty.party();
     System.out.println("---------------inside ledParty command--------------------------------");
   }
 

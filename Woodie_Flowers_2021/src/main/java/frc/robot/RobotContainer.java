@@ -40,7 +40,9 @@ import frc.robot.commands.DriveDotEXE;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.HookDotEXE;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeLEDParallelCommand;
 import frc.robot.commands.LEDDefaultCommand;
+import frc.robot.commands.LEDParty;
 import frc.robot.commands.LEDShooterCommand;
 import frc.robot.commands.LimelightAlignCommand;
 import frc.robot.commands.PulleyDotEXE;
@@ -105,6 +107,7 @@ public class RobotContainer {
   Command autonShoot;
   Command autonNoShoot;
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
+
   // private final BeltSubsyteem m_belt = new BeltSubsyteem();
   // BeltDotEXE beltCommand = new BeltDotEXE(m_belt, m_intake);
 
@@ -273,7 +276,9 @@ public class RobotContainer {
     whileHeldDriverPadButton(
         new ShootSequenceCommand(beltDriveSubsyteem, m_drivetrainSubsystem, m_shooter, m_ledSubsystem, m_intake, m_limelightSubsystem),
         OI.B_BTN_SHOOTSEQUENCE);
-    whileHeldOperatorPadButton(new IntakeCommand(m_intake), OI.B_BTN_INTAKE);
+    //whileHeldOperatorPadButton(new IntakeLEDParallelCommand(m_intake, m_ledSubsystem), OI.B_BTN_INTAKE);
+    //whileHeldOperatorPadButton(new IntakeCommand(m_intake), OI.B_BTN_INTAKE);
+    whileHeldOperatorPadButton(new LEDParty(m_ledSubsystem), OI.B_BTN_INTAKE);
     whileHeldOperatorPadButton(hookCommandpos, OI.LB_BTN_HOOK_POSITIVE);
     whileHeldOperatorPadButton(hookCommandneg, OI.RB_BTN_HOOK_NEGATIVE);
     whileHeldOperatorPadButton(pullyCommandpos, OI.X_BTN_PULLY);
