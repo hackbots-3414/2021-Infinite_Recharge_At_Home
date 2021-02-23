@@ -18,7 +18,7 @@ public class DriveStraight extends CommandBase {
   /** Creates a new DriveStraight. */
   public DriveStraight(double speed, double distance, DrivetrainSubsystem drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.speed = speed;
+    this.speed = -speed;
     this.distance = distance;
     this.drivetrain = drivetrain;  
     addRequirements(drivetrain);
