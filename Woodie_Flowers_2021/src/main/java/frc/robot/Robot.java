@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
     
     // schedule the autonomous command (example)
    
-    
+    /*
       m_autoSelected = m_chooser.getSelected();
       switch (m_autoSelected) { 
         case kCustomAuto: // Put custom auto code here break; case kDefaultAuto: default:
@@ -106,7 +106,8 @@ public class Robot extends TimedRobot {
       if (m_autonomousCommand != null) {
         m_autonomousCommand.schedule();
       }
-     
+     */
+    m_autonomousCommand = m_robotContainer.getSanjanaCommand();
   }
 
   /**

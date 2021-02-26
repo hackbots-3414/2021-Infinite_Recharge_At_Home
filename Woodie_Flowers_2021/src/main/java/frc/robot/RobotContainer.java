@@ -44,6 +44,7 @@ import frc.robot.commands.LEDDefaultCommand;
 import frc.robot.commands.LEDShooterCommand;
 import frc.robot.commands.LimelightAlignCommand;
 import frc.robot.commands.PulleyDotEXE;
+import frc.robot.commands.SanjanaCommandGroup;
 import frc.robot.commands.ShootSequenceCommand;
 import frc.robot.commands.SpinUpCommand;
 import frc.robot.commands.StopCommand;
@@ -101,6 +102,7 @@ public class RobotContainer {
   HookDotEXE hookCommandpos = new HookDotEXE(0.4, hookSubsystem);
   HookDotEXE hookCommandneg = new HookDotEXE(-0.4, hookSubsystem);
   PulleySubsystem pulleySubsystem = new PulleySubsystem();
+
   PulleyDotEXE pullyCommandpos = new PulleyDotEXE(0.9, pulleySubsystem);
   Command autonShoot;
   Command autonNoShoot;
@@ -127,6 +129,10 @@ public class RobotContainer {
     autonShoot = GetCenter();
     autonNoShoot = getAutonomousCommand();
     hookSubsystem.resetEncoder();
+  }
+
+  public Command getSanjanaCommand(){
+    return new SanjanaCommandGroup(m_ledSubsystem, m_drivetrainSubsystem);
   }
   public Command getAutonShoot() {
     return autonShoot;
