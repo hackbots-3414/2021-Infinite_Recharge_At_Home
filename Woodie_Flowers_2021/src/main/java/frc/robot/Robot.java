@@ -103,6 +103,8 @@ public class Robot extends TimedRobot {
         default: 
         m_autonomousCommand = m_robotContainer.getAutonNoShoot();
       }
+
+      m_autonomousCommand = m_robotContainer.getDriveStraightCommand();
       if (m_autonomousCommand != null) {
         m_autonomousCommand.schedule();
       }

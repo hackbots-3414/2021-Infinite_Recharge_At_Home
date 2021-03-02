@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 
@@ -31,10 +32,15 @@ public class DrivetrainSubsystem extends PIDSubsystem {
   AHRS navX = new AHRS(SerialPort.Port.kMXP);
   CANSparkMax leftFront = new CANSparkMax(1, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
   CANSparkMax leftBack = new CANSparkMax(2, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
-  CANSparkMax rightFront = new CANSparkMax(4, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
-  CANSparkMax rightBack = new CANSparkMax(5, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
-  //SpeedControllerGroup left = new SpeedControllerGroup(leftFront, leftBack);
+  CANSparkMax rightFront = new CANSparkMax(3, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax rightBack = new CANSparkMax(4, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
+  // //SpeedControllerGroup left = new SpeedControllerGroup(leftFront, leftBack);
   //SpeedControllerGroup right = new SpeedControllerGroup(rightFront, rightBack);
+  // WPI_TalonSRX leftFront = new WPI_TalonSRX(1);
+  // WPI_TalonSRX leftBack = new WPI_TalonSRX(2);
+  // WPI_TalonSRX rightFront = new WPI_TalonSRX(4);
+  // WPI_TalonSRX rightBack = new WPI_TalonSRX(5);
+
   DifferentialDrive m_drivetrain = new DifferentialDrive(leftFront, rightFront);
   public boolean interupted = false;
   boolean driveIsActive;
@@ -84,10 +90,12 @@ public class DrivetrainSubsystem extends PIDSubsystem {
 
   public double getLeftDistance() {
     return leftBack.getEncoder().getPosition();
+    //return leftBack.getSensorCollection().getQuadraturePosition();
   }
 
   public double getRightDistance() {
     return rightFront.getEncoder().getPosition();
+    //return rightFront.getSensorCollection().getQuadraturePosition();
   }
 
   public double getAverageDistance() {
@@ -96,10 +104,12 @@ public class DrivetrainSubsystem extends PIDSubsystem {
 
   public double getLeftVelocity() {
     return leftBack.getEncoder().getVelocity();
+    //return leftBack.getSensorCollection().getQuadratureVelocity();
   }
 
   public double getRightVelocity() {
     return rightFront.getEncoder().getVelocity();
+    //return rightFront.getSensorCollection().getQuadratureVelocity();
   }
 
   public void printEncoderValues() {
@@ -160,8 +170,10 @@ public class DrivetrainSubsystem extends PIDSubsystem {
   }
 
   public void resetEncoders() {
-    leftBack.getEncoder().setPosition(0);
-    rightFront.getEncoder().setPosition(0);
+   leftBack.getEncoder().setPosition(0);
+   rightFront.getEncoder().setPosition(0);
+   //leftBack.getSensorCollection().setQuadraturePosition(0, 10);
+   //rightFront.getSensorCollection().setQuadraturePosition(0, 10);
   }
 
   // start PID navX code

@@ -88,23 +88,23 @@ public class RobotContainer {
   String trajectoryJSON = "paths/center_auton_start.wpilib.json";
   Path trajectoryPath;
   Trajectory trajectory;
-  private Shooter m_shooter = new Shooter(m_limelightSubsystem);
-  private final LEDShooterCommand m_ledShooter = new LEDShooterCommand(m_ledSubsystem);
+  //private Shooter m_shooter = new Shooter(m_limelightSubsystem);
+  //private final LEDShooterCommand m_ledShooter = new LEDShooterCommand(m_ledSubsystem);
   TurnDotEXE stay0degrees = new TurnDotEXE(m_drivetrainSubsystem, 5, 1);
   DriveDotEXE forward = new DriveDotEXE(200000, 0.5, 6, m_drivetrainSubsystem);
-  private final StopCommand m_stop = new StopCommand(m_shooter, m_drivetrainSubsystem);
-  BeltSubsyteem beltDriveSubsyteem = new BeltSubsyteem();
-  BeltDotEXE beltCommand = new BeltDotEXE(beltDriveSubsyteem);
-  BeltShootCommand ejectBelt = new BeltShootCommand(beltDriveSubsyteem, -0.7);
-  BeltShootCommand beltForward = new BeltShootCommand(beltDriveSubsyteem, 0.7); 
-  HookSubsystem hookSubsystem = new HookSubsystem();
-  HookDotEXE hookCommandpos = new HookDotEXE(0.4, hookSubsystem);
-  HookDotEXE hookCommandneg = new HookDotEXE(-0.4, hookSubsystem);
-  PulleySubsystem pulleySubsystem = new PulleySubsystem();
-  PulleyDotEXE pullyCommandpos = new PulleyDotEXE(0.9, pulleySubsystem);
+  //private final StopCommand m_stop = new StopCommand(m_shooter, m_drivetrainSubsystem);
+  //BeltSubsyteem beltDriveSubsyteem = new BeltSubsyteem();
+  //BeltDotEXE beltCommand = new BeltDotEXE(beltDriveSubsyteem);
+  //BeltShootCommand ejectBelt = new BeltShootCommand(beltDriveSubsyteem, -0.7);
+  //BeltShootCommand beltForward = new BeltShootCommand(beltDriveSubsyteem, 0.7); 
+  //HookSubsystem hookSubsystem = new HookSubsystem();
+  //HookDotEXE hookCommandpos = new HookDotEXE(0.4, hookSubsystem);
+  //HookDotEXE hookCommandneg = new HookDotEXE(-0.4, hookSubsystem);
+  //PulleySubsystem pulleySubsystem = new PulleySubsystem();
+  //PulleyDotEXE pullyCommandpos = new PulleyDotEXE(0.9, pulleySubsystem);
   Command autonShoot;
   Command autonNoShoot;
-  private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  //private final IntakeSubsystem m_intake = new IntakeSubsystem();
   // private final BeltSubsyteem m_belt = new BeltSubsyteem();
   // BeltDotEXE beltCommand = new BeltDotEXE(m_belt, m_intake);
 
@@ -118,15 +118,15 @@ public class RobotContainer {
    */
   public RobotContainer() {
     CommandScheduler.getInstance().setDefaultCommand(m_drivetrainSubsystem, m_driveCommand);
-    CommandScheduler.getInstance().setDefaultCommand(beltDriveSubsyteem, beltCommand);
-    CommandScheduler.getInstance().setDefaultCommand(m_ledSubsystem,
-        new LEDDefaultCommand(m_ledSubsystem, beltDriveSubsyteem));
+    //CommandScheduler.getInstance().setDefaultCommand(beltDriveSubsyteem, beltCommand);
+    //CommandScheduler.getInstance().setDefaultCommand(m_ledSubsystem,
+        //new LEDDefaultCommand(m_ledSubsystem, beltDriveSubsyteem));
     configureButtonBindings();
     m_limelightSubsystem.driverCameraVision();
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     autonShoot = GetCenter();
     autonNoShoot = getAutonomousCommand();
-    hookSubsystem.resetEncoder();
+    //hookSubsystem.resetEncoder();
   }
   public Command getAutonShoot() {
     return autonShoot;
@@ -251,9 +251,10 @@ public class RobotContainer {
 
   }
   public Command GetCenter(){
-    AlignAndShootCommand autonShoot = new AlignAndShootCommand(m_limelightSubsystem, m_drivetrainSubsystem, m_shooter);
-   CenterAuton centerStart = new CenterAuton(shootDistance(), autonShoot, new BeltShootCommand(beltDriveSubsyteem, 0.5), m_stop);
-    return centerStart;
+   // AlignAndShootCommand autonShoot = new AlignAndShootCommand(m_limelightSubsystem, m_drivetrainSubsystem, m_shooter);
+   //CenterAuton centerStart = new CenterAuton(shootDistance(), autonShoot, new BeltShootCommand(beltDriveSubsyteem, 0.5), m_stop);
+    //return centerStart;
+    return null;
   }
 
   /**
@@ -270,16 +271,16 @@ public class RobotContainer {
         OI.Y_BTN_LIMELIGHTALIGN);
     // whileHeldOperatorPadButton(new AlignAndShootCommand(m_limelightSubsystem,
     // m_drivetrainSubsystem, m_shooter), OI.X_BTN_ALIGNANDSHOOT);
-    whileHeldDriverPadButton(
-        new ShootSequenceCommand(beltDriveSubsyteem, m_drivetrainSubsystem, m_shooter, m_ledSubsystem, m_intake, m_limelightSubsystem),
-        OI.B_BTN_SHOOTSEQUENCE);
-    whileHeldOperatorPadButton(new IntakeCommand(m_intake), OI.B_BTN_INTAKE);
-    whileHeldOperatorPadButton(hookCommandpos, OI.LB_BTN_HOOK_POSITIVE);
-    whileHeldOperatorPadButton(hookCommandneg, OI.RB_BTN_HOOK_NEGATIVE);
-    whileHeldOperatorPadButton(pullyCommandpos, OI.X_BTN_PULLY);
-    whileHeldOperatorPadButton(ejectBelt, 8);
-    whileHeldOperatorPadButton(beltForward, 7);
-    whileHeldDriverPadButton(new DriveStraight(.25, 16000, m_drivetrainSubsystem), 6);
+    //whileHeldDriverPadButton(
+    //     new ShootSequenceCommand(beltDriveSubsyteem, m_drivetrainSubsystem, m_shooter, m_ledSubsystem, m_intake, m_limelightSubsystem),
+    //     OI.B_BTN_SHOOTSEQUENCE);
+    // whileHeldOperatorPadButton(new IntakeCommand(m_intake), OI.B_BTN_INTAKE);
+    // whileHeldOperatorPadButton(hookCommandpos, OI.LB_BTN_HOOK_POSITIVE);
+    // whileHeldOperatorPadButton(hookCommandneg, OI.RB_BTN_HOOK_NEGATIVE);
+    // whileHeldOperatorPadButton(pullyCommandpos, OI.X_BTN_PULLY);
+    // whileHeldOperatorPadButton(ejectBelt, 8);
+    // whileHeldOperatorPadButton(beltForward, 7);
+    whileHeldDriverPadButton(new DriveStraight(.5, 16000, m_drivetrainSubsystem), 6);
   }
 
   public void whileHeldOperatorPadButton(final Command command, final int buttonNumber) {
@@ -297,7 +298,9 @@ public class RobotContainer {
     final JoystickButton joystickButton = new JoystickButton(OI.getDrivePad(), buttonNumber);
     joystickButton.whileHeld(command);
   }
-
+  public Command getDriveStraightCommand(){
+    return new DriveStraight(.25, 10000, m_drivetrainSubsystem);
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
