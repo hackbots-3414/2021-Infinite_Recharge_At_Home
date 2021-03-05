@@ -47,6 +47,7 @@ import frc.robot.commands.PulleyDotEXE;
 import frc.robot.commands.ShootSequenceCommand;
 import frc.robot.commands.SpinUpCommand;
 import frc.robot.commands.StopCommand;
+import frc.robot.commands.TurnCommand;
 import frc.robot.commands.TurnDotEXE;
 import frc.robot.subsystems.BeltSubsyteem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -92,6 +93,7 @@ public class RobotContainer {
   private final LEDShooterCommand m_ledShooter = new LEDShooterCommand(m_ledSubsystem);
   TurnDotEXE stay0degrees = new TurnDotEXE(m_drivetrainSubsystem, 5, 1);
   DriveDotEXE forward = new DriveDotEXE(200000, 0.5, 6, m_drivetrainSubsystem);
+  TurnCommand ninetyDegrees = new TurnCommand(m_drivetrainSubsystem);
   private final StopCommand m_stop = new StopCommand(m_shooter, m_drivetrainSubsystem);
   BeltSubsyteem beltDriveSubsyteem = new BeltSubsyteem();
   BeltDotEXE beltCommand = new BeltDotEXE(beltDriveSubsyteem);
@@ -117,7 +119,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    CommandScheduler.getInstance().setDefaultCommand(m_drivetrainSubsystem, m_driveCommand);
+    CommandScheduler.getInstance().setDefaultCommand(m_drivetrainSubsystem, ninetyDegrees);
     CommandScheduler.getInstance().setDefaultCommand(beltDriveSubsyteem, beltCommand);
     CommandScheduler.getInstance().setDefaultCommand(m_ledSubsystem,
         new LEDDefaultCommand(m_ledSubsystem, beltDriveSubsyteem));
