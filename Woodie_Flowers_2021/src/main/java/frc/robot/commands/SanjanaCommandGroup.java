@@ -19,7 +19,7 @@ public class SanjanaCommandGroup extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       // Drive straight
-      new DriveStraight(.5, 10000, drivetrain),
+      new DriveStraight(.5, .1, drivetrain),
       new LEDParty(ledSubsystem)
     );
   }

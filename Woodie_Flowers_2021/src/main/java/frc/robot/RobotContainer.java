@@ -285,7 +285,9 @@ public class RobotContainer {
     whileHeldOperatorPadButton(pullyCommandpos, OI.X_BTN_PULLY);
     whileHeldOperatorPadButton(ejectBelt, 8);
     whileHeldOperatorPadButton(beltForward, 7);
-    whileHeldDriverPadButton(new DriveStraight(.25, 16000, m_drivetrainSubsystem), 6);
+    //whenPressedOperatorPadButton(new DriveStraight(.25, 16000, m_drivetrainSubsystem), 6);
+    whenPressedOperatorPadButton(
+      new SanjanaCommandGroup(m_ledSubsystem, m_drivetrainSubsystem), 6);
   }
 
   public void whileHeldOperatorPadButton(final Command command, final int buttonNumber) {

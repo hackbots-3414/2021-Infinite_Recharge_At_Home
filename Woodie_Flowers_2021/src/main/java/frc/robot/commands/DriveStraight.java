@@ -29,7 +29,6 @@ public class DriveStraight extends CommandBase {
   public void initialize() {
     drivetrain.resetEncoders();
     drivetrain.stop();
-      
     
   }
 
@@ -48,6 +47,7 @@ public class DriveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println("encoder " + drivetrain.getAverageDistance());
     if (drivetrain.getAverageDistance() > distance){
       return true;
     }
