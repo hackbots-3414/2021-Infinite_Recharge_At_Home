@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
 /**
@@ -18,7 +20,7 @@ public class DriveStraight extends CommandBase {
   /** Creates a new DriveStraight. */
   public DriveStraight(double speed, double distance, DrivetrainSubsystem drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.speed = -speed;
+    this.speed = speed;
     this.distance = distance;
     this.drivetrain = drivetrain;  
     addRequirements(drivetrain);
@@ -29,6 +31,7 @@ public class DriveStraight extends CommandBase {
   public void initialize() {
     drivetrain.resetEncoders();
     drivetrain.stop();
+    drivetrain.resetNavX();
       
     
   }
@@ -37,6 +40,15 @@ public class DriveStraight extends CommandBase {
   @Override
   public void execute() {
     drivetrain.tankDrive(speed, speed);
+    if (drivetrain.getHeading() > 2.5){
+      drivetrain.tankDrive(speed - .1, speed);
+    }
+    if (drivetrain.getHeading() < -2.5){
+      drivetrain.tankDrive(speed, speed - .1);
+    }
+    //System.out.println("Average Distance: " + drivetrain.getAverageDistance());
+    //System.out.println("Left Distance: " + drivetrain.getLeftDistance());
+    //System.out.println("Right Distance: " + drivetrain.getRightDistance());
   }
 
   // Called once the command ends or is interrupted.

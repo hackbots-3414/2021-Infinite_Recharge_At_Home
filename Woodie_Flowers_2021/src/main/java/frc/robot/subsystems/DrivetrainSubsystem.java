@@ -32,8 +32,8 @@ public class DrivetrainSubsystem extends PIDSubsystem {
   AHRS navX = new AHRS(SerialPort.Port.kMXP);
   CANSparkMax leftFront = new CANSparkMax(1, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
   CANSparkMax leftBack = new CANSparkMax(2, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
-  CANSparkMax rightFront = new CANSparkMax(3, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
-  CANSparkMax rightBack = new CANSparkMax(4, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax rightFront = new CANSparkMax(4, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
+  CANSparkMax rightBack = new CANSparkMax(5, com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
   // //SpeedControllerGroup left = new SpeedControllerGroup(leftFront, leftBack);
   //SpeedControllerGroup right = new SpeedControllerGroup(rightFront, rightBack);
   // WPI_TalonSRX leftFront = new WPI_TalonSRX(1);
@@ -94,7 +94,7 @@ public class DrivetrainSubsystem extends PIDSubsystem {
   }
 
   public double getRightDistance() {
-    return rightFront.getEncoder().getPosition();
+    return -rightFront.getEncoder().getPosition();
     //return rightFront.getSensorCollection().getQuadraturePosition();
   }
 
@@ -246,4 +246,10 @@ public class DrivetrainSubsystem extends PIDSubsystem {
     navX.reset();
     super.enable();
   }
+
+  public void resetNavX(){
+    navX.reset();
+  }
+
+
 }

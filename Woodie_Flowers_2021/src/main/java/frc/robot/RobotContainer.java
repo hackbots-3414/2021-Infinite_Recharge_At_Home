@@ -299,7 +299,7 @@ public class RobotContainer {
     joystickButton.whileHeld(command);
   }
   public Command getDriveStraightCommand(){
-    return new DriveStraight(.25, 10000, m_drivetrainSubsystem);
+    return new DriveStraight(.25, 1.5, m_drivetrainSubsystem);
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
