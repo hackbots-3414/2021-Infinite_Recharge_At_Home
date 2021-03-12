@@ -67,4 +67,8 @@ public class LimelightSubsystem extends SubsystemBase {
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
     }
 
+    public void powersell() {
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("vrp").setNumber(4);
+    }
+
 }
