@@ -144,7 +144,7 @@ public class RobotContainer {
             // Add kinematics to ensure max speed is actually obeyed
             .setKinematics(DriveConstants.kDriveKinematics)
             // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint).setReversed(true);
+            .addConstraint(autoVoltageConstraint).setReversed(false);
     // An example trajectory to follow. All units in meters.
     try {
       trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
@@ -159,7 +159,7 @@ public class RobotContainer {
         new Pose2d(6.724, -2.166, new Rotation2d(Math.PI)), List.of(),
         new Pose2d(2.732, -2.166, new Rotation2d(Math.PI)), config); */
     Trajectory backwards = TrajectoryGenerator.generateTrajectory(new Pose2d(0, 0, new Rotation2d(0)), List.of(),
-        new Pose2d(-2, 0, new Rotation2d(0)), config);
+        new Pose2d(3, 0, new Rotation2d(0)), config);
 
     /*Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
@@ -202,7 +202,7 @@ public class RobotContainer {
             // Add kinematics to ensure max speed is actually obeyed
             .setKinematics(DriveConstants.kDriveKinematics)
             // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint).setReversed(true);
+            .addConstraint(autoVoltageConstraint).setReversed(false);
     // An example trajectory to follow. All units in meters.
     try {
       trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
@@ -217,7 +217,7 @@ public class RobotContainer {
         new Pose2d(6.724, -2.166, new Rotation2d(Math.PI)), List.of(),
         new Pose2d(2.732, -2.166, new Rotation2d(Math.PI)), config); */
     Trajectory backwards = TrajectoryGenerator.generateTrajectory(new Pose2d(0, 0, new Rotation2d(0)), List.of(),
-        new Pose2d(-2 /*-4.5*/, 0, new Rotation2d(0)), config);
+        new Pose2d(3 /*-4.5*/, 0, new Rotation2d(0)), config);
 
     /*Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
