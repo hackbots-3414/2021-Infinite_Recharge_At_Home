@@ -23,7 +23,7 @@ public class OI {
 
   //BUTTON MAPPINGS
   public static final int B_BTN_SHOOTSEQUENCE = 2;
-  //public static final int X_BTN_ALIGNANDSHOOT = 3;
+  public static final int X_BTN_ALIGNANDSHOOT = 3;
   public static final int Y_BTN_LIMELIGHTALIGN = 4;
   public static final int B_BTN_INTAKE = 2;
   public static final int LB_BTN_HOOK_POSITIVE = 4;

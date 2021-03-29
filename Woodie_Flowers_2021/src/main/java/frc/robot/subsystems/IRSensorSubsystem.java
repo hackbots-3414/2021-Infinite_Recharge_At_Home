@@ -6,6 +6,7 @@ import frc.robot.commands.DriveCommand;
 
 public class IRSensorSubsystem extends SubsystemBase {
     private AnalogInput irAnalog = new AnalogInput(1);
+    boolean redpath = false;
 
     public void IRSensorSubsytem() {
 
@@ -23,6 +24,12 @@ public class IRSensorSubsystem extends SubsystemBase {
         return 137.5/(getVoltage() - 1.125);
 
     }
+
+public void setRedPath(boolean redpath) {
+    this.redpath = redpath;
+
+}
+
 }
 
 // Command to compute whether robot is looking at red or blue path

@@ -268,8 +268,8 @@ public class RobotContainer {
 
     whileHeldDriverPadButton(new LimelightAlignCommand(m_limelightSubsystem, m_drivetrainSubsystem),
         OI.Y_BTN_LIMELIGHTALIGN);
-    // whileHeldOperatorPadButton(new AlignAndShootCommand(m_limelightSubsystem,
-    // m_drivetrainSubsystem, m_shooter), OI.X_BTN_ALIGNANDSHOOT);
+     whileHeldDriverPadButton(new AlignAndShootCommand(m_limelightSubsystem,
+     m_drivetrainSubsystem, m_shooter), OI.X_BTN_ALIGNANDSHOOT);
     whileHeldDriverPadButton(
         new ShootSequenceCommand(beltDriveSubsyteem, m_drivetrainSubsystem, m_shooter, m_ledSubsystem, m_intake, m_limelightSubsystem),
         OI.B_BTN_SHOOTSEQUENCE);

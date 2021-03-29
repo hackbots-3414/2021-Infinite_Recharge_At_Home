@@ -15,6 +15,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.Shooter;
+import frc.robot.commands.BeltShootCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -30,10 +31,10 @@ public class ShootSequenceCommand extends SequentialCommandGroup {
   public ShootSequenceCommand(BeltSubsyteem belt, DrivetrainSubsystem drivetrain, Shooter shooter, LEDSubsystem led,
      IntakeSubsystem intake, LimelightSubsystem limelight) {
     super();
-    //addCommands(new AlignAndShootCommand(limelight, drivetrain, shooter), new
-    //BeltShootCommand(belt));
+    addCommands(new AlignAndShootCommand(limelight, drivetrain, shooter), new
+    BeltShootCommand(belt, 1));
     addCommands(new SpinUpCommand(shooter, limelight), new BeltShootCommand(belt,0.5));
-    //addCommands(new TransportFullLEDParallelCommand(intake, belt, led), new ShooterLEDParallelCommand(shooter, led));
+    //addCommands(new TransportFullLEDParallelCommand(intake, belt, led), new ShooterLEDParallelCommand(shooter, led, limelight));
     this.shooter = shooter;
     this.drivetrain = drivetrain;
   }
