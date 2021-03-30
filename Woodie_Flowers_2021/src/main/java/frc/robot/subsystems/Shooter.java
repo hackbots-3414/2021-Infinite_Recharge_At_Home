@@ -17,8 +17,9 @@ public class Shooter extends SubsystemBase {
     public Shooter(LimelightSubsystem limelight) {
         super();
         this.limelight = limelight;
-        rightMotor.setInverted(true);
+        leftMotor.setInverted(true);
         rightMotor.follow(leftMotor);
+        
         init();
     }
 
@@ -52,7 +53,7 @@ public class Shooter extends SubsystemBase {
         double distance = 74/(Math.tan(Math.toRadians(20) + limelightVerticalOffsetToRadians));
         double x = (distance/12)-2;
         SmartDashboard.putNumber("Distance from target",x); // The minus two is a fudge factor
-        double speedOfShooter = (500*x)+4000;
+        double speedOfShooter = (500*x)+6000;
         System.out.println("shooter velocity: " + speedOfShooter);
         leftMotor.set(ControlMode.Velocity, speedOfShooter);
         

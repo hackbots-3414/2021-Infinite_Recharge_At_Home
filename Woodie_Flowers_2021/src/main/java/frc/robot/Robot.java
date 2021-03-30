@@ -103,10 +103,11 @@ public class Robot extends TimedRobot {
         default: 
         m_autonomousCommand = m_robotContainer.getAutonNoShoot();
       }
+      m_autonomousCommand = m_robotContainer.InterStellar();
       if (m_autonomousCommand != null) {
         m_autonomousCommand.schedule();
       }
-     
+   
   }
 
   /**
@@ -114,6 +115,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    
   }
 
   @Override

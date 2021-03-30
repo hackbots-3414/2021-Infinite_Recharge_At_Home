@@ -104,6 +104,7 @@ public class RobotContainer {
   PulleyDotEXE pullyCommandpos = new PulleyDotEXE(0.9, pulleySubsystem);
   Command autonShoot;
   Command autonNoShoot;
+
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
   // private final BeltSubsyteem m_belt = new BeltSubsyteem();
   // BeltDotEXE beltCommand = new BeltDotEXE(m_belt, m_intake);
@@ -135,42 +136,6 @@ public class RobotContainer {
     return autonNoShoot;
   }
   public Command getAutonomousCommand() {
-
-    autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(DriveConstants.ksVolts,
-        DriveConstants.kvVoltSecondsPerMeter, DriveConstants.kaVoltSecondsSquaredPerMeter),
-        DriveConstants.kDriveKinematics, 5);
-    config = new TrajectoryConfig(DriveConstants.kMaxSpeedMetersPerSecond,
-        DriveConstants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(DriveConstants.kDriveKinematics)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint).setReversed(false);
-    // An example trajectory to follow. All units in meters.
-    try {
-      trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-
-    } catch (IOException ex) {
-      // TODO Auto-generated catch block
-      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-      ex.printStackTrace();
-    }
-   /* Trajectory backwardsCurve = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(6.724, -2.166, new Rotation2d(Math.PI)), List.of(),
-        new Pose2d(2.732, -2.166, new Rotation2d(Math.PI)), config); */
-    Trajectory backwards = TrajectoryGenerator.generateTrajectory(new Pose2d(0, 0, new Rotation2d(0)), List.of(),
-        new Pose2d(3, 0, new Rotation2d(0)), config);
-
-    /*Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, 0), new Translation2d(2, 0)),
-
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
-        // Pass config
-        config);*/
     RamseteController disabledRamsete = new RamseteController() {
       @Override
       public ChassisSpeeds calculate(Pose2d currentPose, Pose2d poseRef, double linearVelocityRefMeters,
@@ -179,7 +144,7 @@ public class RobotContainer {
       }
     };
 
-    RamseteCommand ramseteCommand = new RamseteCommand(backwards, m_drivetrainSubsystem::getPose, disabledRamsete,
+    RamseteCommand ramseteCommand = new RamseteCommand(StraightTrajectoryFactory.createStraightTrajectory(3), m_drivetrainSubsystem::getPose, disabledRamsete,
         // new RamseteController(DriveConstants.kRamseteB, DriveConstants.kRamseteZeta),
         new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
             DriveConstants.kaVoltSecondsSquaredPerMeter),
@@ -193,42 +158,6 @@ public class RobotContainer {
 
   }
   public Command shootDistance() {
-
-    autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(DriveConstants.ksVolts,
-        DriveConstants.kvVoltSecondsPerMeter, DriveConstants.kaVoltSecondsSquaredPerMeter),
-        DriveConstants.kDriveKinematics, 5);
-    config = new TrajectoryConfig(DriveConstants.kMaxSpeedMetersPerSecond,
-        DriveConstants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(DriveConstants.kDriveKinematics)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint).setReversed(false);
-    // An example trajectory to follow. All units in meters.
-    try {
-      trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-
-    } catch (IOException ex) {
-      // TODO Auto-generated catch block
-      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-      ex.printStackTrace();
-    }
-   /* Trajectory backwardsCurve = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(6.724, -2.166, new Rotation2d(Math.PI)), List.of(),
-        new Pose2d(2.732, -2.166, new Rotation2d(Math.PI)), config); */
-    Trajectory backwards = TrajectoryGenerator.generateTrajectory(new Pose2d(0, 0, new Rotation2d(0)), List.of(),
-        new Pose2d(3 /*-4.5*/, 0, new Rotation2d(0)), config);
-
-    /*Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, 0), new Translation2d(2, 0)),
-
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
-        // Pass config
-        config);*/
     RamseteController disabledRamsete = new RamseteController() {
       @Override
       public ChassisSpeeds calculate(Pose2d currentPose, Pose2d poseRef, double linearVelocityRefMeters,
@@ -236,8 +165,7 @@ public class RobotContainer {
         return new ChassisSpeeds(linearVelocityRefMeters, 0.0, angularVelocityRefRadiansPerSecond);
       }
     };
-
-    RamseteCommand ramseteCommand = new RamseteCommand(backwards, m_drivetrainSubsystem::getPose, disabledRamsete,
+    RamseteCommand ramseteCommand = new RamseteCommand(StraightTrajectoryFactory.createStraightTrajectory(3), m_drivetrainSubsystem::getPose, disabledRamsete,
         // new RamseteController(DriveConstants.kRamseteB, DriveConstants.kRamseteZeta),
         new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter,
             DriveConstants.kaVoltSecondsSquaredPerMeter),
@@ -250,10 +178,15 @@ public class RobotContainer {
     return ramseteCommand.andThen(() -> m_drivetrainSubsystem.tankDriveVolts(0, 0));
 
   }
+
   public Command GetCenter(){
     AlignAndShootCommand autonShoot = new AlignAndShootCommand(m_limelightSubsystem, m_drivetrainSubsystem, m_shooter);
    CenterAuton centerStart = new CenterAuton(shootDistance(), autonShoot, new BeltShootCommand(beltDriveSubsyteem, 0.5), m_stop);
     return centerStart;
+  }
+
+  public Command InterStellar(){
+    return StraightTrajectoryFactory.createInterstellarACommand(m_drivetrainSubsystem, m_limelightSubsystem, m_shooter, m_intake, beltDriveSubsyteem, m_ledSubsystem);
   }
 
   /**
