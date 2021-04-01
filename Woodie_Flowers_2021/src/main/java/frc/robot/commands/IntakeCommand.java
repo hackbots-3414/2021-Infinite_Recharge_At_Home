@@ -30,7 +30,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     intake.goDown();
-    intake.setSpeed(0.40);
+    intake.setSpeed(0.30);
   }
 
   // Make this return true when this Command no longer needs to run execute()
