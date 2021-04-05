@@ -9,30 +9,30 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.Utilities;;
+import frc.robot.subsystems.Utilities;
 
-public class TurnDotEXE extends CommandBase {
+public class TurnInMotion extends CommandBase {
   DrivetrainSubsystem navXDrive = null;
   double m_angle;
   public Utilities util = new Utilities();
+  int m_radius;
   public double m_tolerance;
   double initialRefrenceAngle;
   boolean isFinishedend = false;
-
-  public TurnDotEXE(final DrivetrainSubsystem pidNavXDrive, double angularBruhMoment, double m_tolerancei) {
-
+  public TurnInMotion(final DrivetrainSubsystem pidNavXDrive, double finalAngle, double tolerance, int radius) {
     navXDrive = pidNavXDrive;
-    m_angle = angularBruhMoment;
-    m_tolerance = m_tolerancei;
+    m_angle = finalAngle;
+    m_tolerance = tolerance;
+    m_radius = radius;
     initialRefrenceAngle = m_angle;
+    
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-
   }
 
   // Called just before this Command runs the first time
   @Override
-  public void initialize() {
+  protected void initialize() {
     if (Math.abs(m_angle) > 0) {
       navXDrive.setPIDValues(util.k_PTurn, util.k_ITurn, util.k_DTurn);
       navXDrive.getController().setTolerance(0.01, 0.01);
@@ -46,30 +46,23 @@ public class TurnDotEXE extends CommandBase {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  public void execute() {
-    // System.out.println("execute");
-    // System.out.println("setSetpoint "+ navXDrive.getController().getSetpoint());
-    // System.out.println("Ross's will to live");
-    if (Math.abs(navXDrive.getController().getPositionError()) < m_tolerance) {
-      // System.out.println("isFinished: " + true);
-      navXDrive.setInterupted(false);
-      util.setAtSetpoint(true);
-      isFinishedend = true;
-    }
+  protected void execute() {
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  public boolean isFinished() {
-    // System.out.println("isFinished: " + navXDrive.atSetPoint());
-    // System.out.println("tolerance: "+ util.toler);
-    // System.out.println("tolerance: "+ m_tolerance);
-    return isFinishedend;
+  protected boolean isFinished() {
+    return false;
   }
 
   // Called once after isFinished returns true
+  @Override
+  protected void end() {
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
-
+  @Override
+  protected void interrupted() {
+  }
 }
