@@ -45,6 +45,7 @@ import frc.robot.commands.LEDShooterCommand;
 import frc.robot.commands.LimelightAlignCommand;
 import frc.robot.commands.PulleyDotEXE;
 import frc.robot.commands.ShootSequenceCommand;
+import frc.robot.commands.ShooterHoodCommand;
 import frc.robot.commands.SpinUpCommand;
 import frc.robot.commands.StopCommand;
 import frc.robot.commands.TurnDotEXE;
@@ -57,6 +58,7 @@ import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.PulleySubsystem;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterHoodSubsystem;
 import frc.robot.teleop.OI;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -88,6 +90,7 @@ public class RobotContainer {
   String trajectoryJSON = "paths/center_auton_start.wpilib.json";
   Path trajectoryPath;
   Trajectory trajectory;
+  private ShooterHoodSubsystem m_hood = new ShooterHoodSubsystem();
   private Shooter m_shooter = new Shooter(m_limelightSubsystem);
   private final LEDShooterCommand m_ledShooter = new LEDShooterCommand(m_ledSubsystem);
   TurnDotEXE stay0degrees = new TurnDotEXE(m_drivetrainSubsystem, 5, 1);
@@ -273,6 +276,8 @@ public class RobotContainer {
     whileHeldDriverPadButton(
         new ShootSequenceCommand(beltDriveSubsyteem, m_drivetrainSubsystem, m_shooter, m_ledSubsystem, m_intake, m_limelightSubsystem),
         OI.B_BTN_SHOOTSEQUENCE);
+    whileHeldDriverPadButton(new ShooterHoodCommand(m_hood, 25), 7);
+    whileHeldDriverPadButton(new ShooterHoodCommand(m_hood, 15), 8);
     whileHeldOperatorPadButton(new IntakeCommand(m_intake), OI.B_BTN_INTAKE);
     whileHeldOperatorPadButton(hookCommandpos, OI.LB_BTN_HOOK_POSITIVE);
     whileHeldOperatorPadButton(hookCommandneg, OI.RB_BTN_HOOK_NEGATIVE);

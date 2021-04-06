@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -30,6 +33,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "Center Auton";
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private String m_autoSelected;
+  TalonSRX hoodPot = new TalonSRX(21);
   ;
 
   /**
@@ -68,6 +72,8 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    hoodPot.configSelectedFeedbackSensor(FeedbackDevice.Analog);
+    SmartDashboard.putNumber("Shooter Hood Pot: ", hoodPot.getSelectedSensorPosition());
   }
 
   /**
