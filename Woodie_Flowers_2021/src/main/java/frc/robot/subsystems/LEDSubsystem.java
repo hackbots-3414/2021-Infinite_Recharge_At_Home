@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 
 public class LEDSubsystem extends SubsystemBase {
-  public static final int NUMBER_OF_LEDS = 12;
+  public static final int NUMBER_OF_LEDS = 40;
   public static final int LED_PORT = 9;
   private AddressableLED m_led;
   private AddressableLEDBuffer m_ledBuffer;
@@ -154,6 +154,22 @@ public class LEDSubsystem extends SubsystemBase {
     colorPulse(ColorSystem.getColor(ColorSystem.COLOR_PURPLE));
   }
 
+  public void colorPulseGreen() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_GREEN));
+  }
+
+  public void colorPulseYellow() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_YELLOW));
+  }
+
+  public void colorPulseOrange() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_ORANGE));
+  }
+
+  public void colorPulseRed() {
+    colorPulse(ColorSystem.getColor(ColorSystem.COLOR_RED));
+  }
+
   public void drivingTargetNotInView() {
     solidColorYellow();
   }
@@ -198,5 +214,15 @@ public class LEDSubsystem extends SubsystemBase {
     }
     m_led.setData(m_ledBuffer);
     m_led.start();
+  }
+  public void party(){
+    colorPulsePurple();
+    lightChaseRed();
+    colorPulseOrange();
+    lightChaseGreen();
+    colorPulseYellow();
+    lightChaseBlue();
+    colorPulseRed();
+
   }
 }
