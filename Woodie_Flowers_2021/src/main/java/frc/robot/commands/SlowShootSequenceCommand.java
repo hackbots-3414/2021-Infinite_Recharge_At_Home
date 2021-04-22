@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.BeltSubsyteem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -20,7 +21,7 @@ import frc.robot.commands.BeltShootCommand;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class ShootSequenceCommand extends SequentialCommandGroup {
+public class SlowShootSequenceCommand extends ParallelCommandGroup {
   /**
    * Creates a new SequenceCommand.
    */
@@ -28,12 +29,11 @@ public class ShootSequenceCommand extends SequentialCommandGroup {
   Shooter shooter;
   DrivetrainSubsystem drivetrain;
 
-  public ShootSequenceCommand(BeltSubsyteem belt, DrivetrainSubsystem drivetrain, Shooter shooter, LEDSubsystem led,
+  public SlowShootSequenceCommand(BeltSubsyteem belt, DrivetrainSubsystem drivetrain, Shooter shooter, LEDSubsystem led,
      IntakeSubsystem intake, LimelightSubsystem limelight) {
     super();
-    addCommands(new AlignAndShootCommand(limelight, drivetrain, shooter), new
-    BeltShootCommand(belt, 1));
-    addCommands(new SpinUpCommand(shooter, limelight), new BeltShootCommand(belt,0.5));
+    //addCommands(new BeltShootCommand(belt, 1));
+    addCommands(new ShootSlow(shooter), new BeltShootCommand(belt,0.5));
     //addCommands(new TransportFullLEDParallelCommand(intake, belt, led), new ShooterLEDParallelCommand(shooter, led, limelight));
     this.shooter = shooter;
     this.drivetrain = drivetrain;
@@ -53,3 +53,4 @@ public class ShootSequenceCommand extends SequentialCommandGroup {
     // new StopCommand(shooter, drivetrain);
   }
 }
+

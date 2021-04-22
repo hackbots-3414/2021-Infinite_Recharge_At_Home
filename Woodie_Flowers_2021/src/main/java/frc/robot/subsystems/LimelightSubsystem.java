@@ -52,18 +52,22 @@ public class LimelightSubsystem extends SubsystemBase {
     }
 
     public void turnLEDOn () {
+        System.out.println("--------------- LED is ON");
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
     }
 
     public void turnLEDOff() {
+        System.out.println("---------------- LED is OFF");
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
     }
 
     public void visionProcessor() {
+        System.out.println("------------ Vision processor is ON");
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
     }
 
     public void driverCameraVision() {
+        System.out.println("-------------------- Driver camera vision is ON");
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
     }
 

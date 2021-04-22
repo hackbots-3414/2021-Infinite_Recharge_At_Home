@@ -11,6 +11,7 @@ public class LimelightAlignCommand extends CommandBase {
     private final LimelightSubsystem limelight;
     private final DrivetrainSubsystem drivetrain;
     private long startTime = System.currentTimeMillis();
+    private int counter = 0;
 
     public LimelightAlignCommand(LimelightSubsystem limelight, DrivetrainSubsystem drivetrain) {
         super();
@@ -26,37 +27,50 @@ public class LimelightAlignCommand extends CommandBase {
         startTime = System.currentTimeMillis();
         // TODO Auto-generated method stub
         super.initialize();
-    }
-    @Override
-    public void execute() {
         limelight.turnLEDOn();
         limelight.visionProcessor();
-        Timer.delay(0.3); 
+        Timer.delay(0.1);
+    }
+
+    @Override
+    public void execute() {
         SmartDashboard.putNumber("limelight y value: ", limelight.getVerticalOffset() + 20);
+        SmartDashboard.putNumber("limelight x value: ", limelight.getHorizontalOffset() + 20);
         System.out.println("limelight y value: " + limelight.getVerticalOffset());
         System.out.println("////////Limelight Is On!////////");
     }
+
     @Override
     public boolean isFinished() {
         double tx = limelight.getHorizontalOffset();
         double ta = limelight.getTargetArea();
-        double angle_tolerance = 0.9; //0.03;
+        double angle_tolerance = 0.5; // 0.03;
         // double ta = limelight.getTargetArea();
-        if (System.currentTimeMillis() - startTime < 300 && tx == 0){
-            return false; 
+        if (System.currentTimeMillis() - startTime < 600 && tx == 0) {
+            System.out.println("//////////////////// tx = 0 or delay reached");
+            return false;
         }
+        System.out.println("//////////////////// tx = " + tx);
         if (tx > -1 * angle_tolerance && tx < angle_tolerance) {
-        System.out.println("////////Exited Limelight////////");
+            // Increment counter for aligned to target. If we count 10 times, we must be
+            // aligned
+            counter++;
             drivetrain.tankDrive(0, 0);
-            return true;
-        } else {
+            if (counter >= 10) {
+                System.out.println("////////Exited Limelight////////");
+                return true;
+            } else {
+                return false;
+            }
 
+        } else {
+            counter = 0;
             // double kp = -0.025f;
             double heading_error = tx;
             double base = 0.25;
-            double throttleFloor = 0.18;//0.05
+            double throttleFloor = 0.25;// 0.05
             double throttlePercent = 0.0;
-            double angleBias = .10;//1.5s
+            double angleBias = .10;// 1.5s
             // Equation to perform an inverse expontation decay of the throttle response
             double magnitude = base - 1 / Math.exp(Math.abs(heading_error + angleBias));
 
@@ -71,31 +85,30 @@ public class LimelightAlignCommand extends CommandBase {
              * System.out.println("this is steering_adjust " +steering_adjust);
              */
 
-            double left = 0.0;
-            left += throttlePercent;// steering_adjust; originally subtract
-            double right = 0.0;
-            right -= throttlePercent;// steering_adjust;
-
+            // left += throttlePercent;// steering_adjust; originally subtract
+            // right -= throttlePercent;// steering_adjust;
+            double rotation;
             // //New alignmnet code
-            // if (tx > 0) {
-            // //Pivot Left
-            // left = 0.2;
-            // right = -0.2;
-            // } else {
-            // //Pivot right
-            // left = -0.2;
-            // right = 0.2;
-            // }
-            drivetrain.tankDrive(left, right);
+            if (Math.abs(tx) > 10) {
+                rotation = 0.37;
+            } else {
+                rotation = 0.18;
+            }
+
+            if (tx > 0) {
+                rotation = -rotation;
+            }
+            System.out.println("-------------limelight align-----------------------------");
+            drivetrain.drive(0, rotation);
             return false;
         }
-
     }
+
     @Override
     public void end(boolean interrupted) {
-       //Timer.delay(0.3);
+        // Timer.delay(0.3);
         limelight.turnLEDOff();
-       limelight.driverCameraVision();
+        limelight.driverCameraVision();
     }
 
     public void interrupted() {

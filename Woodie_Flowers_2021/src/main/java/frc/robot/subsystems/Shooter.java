@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
     double speedOfShooter;
+    double speedConstant;
     LimelightSubsystem limelight;
     WPI_TalonFX leftMotor = new WPI_TalonFX(12);
     WPI_TalonFX rightMotor = new WPI_TalonFX(11); //34' 16500, 13ft - 22ft 14000, 22ft - 25ft 14500, 26ft 14600, 28ft 15000/ 30ft 15500
@@ -17,7 +18,8 @@ public class Shooter extends SubsystemBase {
     public Shooter(LimelightSubsystem limelight) {
         super();
         this.limelight = limelight;
-        rightMotor.setInverted(true);
+        leftMotor.setInverted(true);
+        //rightMotor.setInverted(true);
         rightMotor.follow(leftMotor);
         init();
     }
@@ -50,9 +52,9 @@ public class Shooter extends SubsystemBase {
     public void shoot() {
         double limelightVerticalOffsetToRadians = Math.toRadians(limelight.getVerticalOffset());
         double distance = 74/(Math.tan(Math.toRadians(20) + limelightVerticalOffsetToRadians));
-        double x = (distance/12)-2;
+        double x = 220;//(distance/12)-2;
         SmartDashboard.putNumber("Distance from target",x); // The minus two is a fudge factor
-        double speedOfShooter = (500*x)+4000;
+        double speedOfShooter =  (500*x) + 6000;
         System.out.println("shooter velocity: " + speedOfShooter);
         leftMotor.set(ControlMode.Velocity, speedOfShooter);
         
@@ -73,4 +75,12 @@ public class Shooter extends SubsystemBase {
         leftMotor.set(0.0);
     }
 
-}
+    public void slowShoot() {
+        double limelightVerticalOffsetToRadians = Math.toRadians(limelight.getVerticalOffset());
+        double distance = 74/(Math.tan(Math.toRadians(20) + limelightVerticalOffsetToRadians));
+        double x = (distance/12)-2;
+        SmartDashboard.putNumber("Distance from target",x); // The minus two is a fudge factor
+        double speedOfShooter = (400*x); //7000;
+        System.out.println("shooter velocity: " + speedOfShooter);
+        leftMotor.set(ControlMode.Velocity, speedOfShooter);
+    }
