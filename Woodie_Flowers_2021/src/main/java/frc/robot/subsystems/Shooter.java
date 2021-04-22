@@ -80,9 +80,7 @@ public class Shooter extends SubsystemBase {
         double distance = 74/(Math.tan(Math.toRadians(20) + limelightVerticalOffsetToRadians));
         double x = (distance/12)-2;
         SmartDashboard.putNumber("Distance from target",x); // The minus two is a fudge factor
-        double speedOfShooter = (500*x) + 1000; //7000;
+        double speedOfShooter = (400*x); //7000;
         System.out.println("shooter velocity: " + speedOfShooter);
         leftMotor.set(ControlMode.Velocity, speedOfShooter);
     }
-
-}

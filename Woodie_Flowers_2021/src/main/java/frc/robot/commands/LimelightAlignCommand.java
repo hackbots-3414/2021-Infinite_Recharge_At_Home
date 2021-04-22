@@ -92,7 +92,7 @@ public class LimelightAlignCommand extends CommandBase {
             if (Math.abs(tx) > 10) {
                 rotation = 0.37;
             } else {
-                rotation = 0.27;
+                rotation = 0.18;
             }
 
             if (tx > 0) {

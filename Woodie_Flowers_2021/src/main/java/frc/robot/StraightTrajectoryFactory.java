@@ -99,29 +99,21 @@ public class StraightTrajectoryFactory {
         result.addCommands(new IntakeBelt(intake, belt).withTimeout(5));
         //Yellow zone
         result.addCommands(new LimelightAlignCommand(limelight, drivetrainSubsystem));
-        result.addCommands(createDriveDistance(5, drivetrainSubsystem));
+        result.addCommands(createDriveDistance(5.1, drivetrainSubsystem));
         result.addCommands(new SlowShootSequenceCommand(belt, drivetrainSubsystem, shooter, ledSubsystem, intake, limelight).withTimeout(3));
-        result.addCommands(createDriveDistance(-5, drivetrainSubsystem));
-        result.addCommands(new IntakeCommand(intake).withTimeout(5));
+        result.addCommands(createDriveDistance(-5.1, drivetrainSubsystem));
+        result.addCommands(new IntakeBelt(intake, belt).withTimeout(5));
         //Green zone
         result.addCommands(new LimelightAlignCommand(limelight, drivetrainSubsystem));
-        result.addCommands(createDriveDistance(6.5, drivetrainSubsystem));
+        result.addCommands(createDriveDistance(6.8, drivetrainSubsystem));
         result.addCommands(new SlowShootSequenceCommand(belt, drivetrainSubsystem, shooter, ledSubsystem, intake, limelight).withTimeout(3));
-        result.addCommands(createDriveDistance(-6.5, drivetrainSubsystem));
-        result.addCommands(new IntakeCommand(intake).withTimeout(5));
-        //Last 6 balls from red zone
+        result.addCommands(createDriveDistance(-6.8, drivetrainSubsystem));
+        result.addCommands(new IntakeBelt(intake, belt).withTimeout(5));
+        //Last 3 balls from red zone
         result.addCommands(createDriveDistance(1.5, drivetrainSubsystem));
         result.addCommands(new ShootSequenceCommand(belt, drivetrainSubsystem, shooter, ledSubsystem, intake, limelight).withTimeout(3));
         result.addCommands(createDriveDistance(-1.5, drivetrainSubsystem));
-        result.addCommands(new IntakeBelt(intake, belt).withTimeout(5));
 
-        result.addCommands(createDriveDistance(1.5, drivetrainSubsystem));
-        result.addCommands(new ShootSequenceCommand(belt, drivetrainSubsystem, shooter, ledSubsystem, intake, limelight).withTimeout(3));
-        result.addCommands(createDriveDistance(-1.5, drivetrainSubsystem));
-        result.addCommands(new IntakeBelt(intake, belt).withTimeout(5));
-        
-        
-        
         
         return result;
     }
